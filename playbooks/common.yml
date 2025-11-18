@@ -1,5 +1,12 @@
 # Taken voor alle laptops
 # playbooks/common.yml
+# 1. EERST de remote toevoegen
+- name: Voeg Flathub remote toe voor de gebruiker
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    method: user
 - name: Zorg dat Firefox (user) geïnstalleerd is
   community.general.flatpak:
     name: org.mozilla.firefox
