@@ -1,0 +1,18 @@
+# Taken voor leerlingen laptops
+# playbooks/leerlingen.yml
+- name: Specifieke taken voor Leerlingen
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Installeer GIMP (user)
+      community.general.flatpak:
+        name: org.gimp.GIMP
+        state: present
+        method: user
+        remote: flathub
+
+    - name: Zorg dat Steam (user) VERWIJDERD is
+      community.general.flatpak:
+        name: com.valvesoftware.Steam
+        state: absent # Zorgt ervoor dat het niet geïnstalleerd is
+        method: user

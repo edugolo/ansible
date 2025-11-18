@@ -1,0 +1,8 @@
+# Taken voor administratie laptops
+- name: Specifieke taken voor Administratie
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: (placeholder) Er zijn nog geen specifieke taken
+      ansible.builtin.debug:
+        msg: "Deze laptop is correct geïdentificeerd als 'administratie'."

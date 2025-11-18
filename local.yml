@@ -1,0 +1,36 @@
+# Hoofd playbook voor (router)
+- name: Hoofd-playbook voor alle laptops
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  pre_tasks:
+    # 1. Lees het /etc/laptop-group bestand
+    - name: Bepaal de laptopgroep
+      ansible.builtin.command: cat /etc/ansible/laptop-group
+      register: group_file_content
+      changed_when: false
+      failed_when: false # Faal niet als het bestand niet bestaat
+
+    # 2. Sla de inhoud op in een variabele (e.g., "leerlingen")
+    - name: Zet de 'laptop_group' variabele
+      ansible.builtin.set_fact:
+        laptop_group: "{{ group_file_content.stdout | trim | default('geen_groep') }}"
+
+  tasks:
+    # 3. Importeer ALTIJD de 'common' taken
+    - name: Importeer 'common' taken (voor iedereen)
+      ansible.builtin.import_playbook: playbooks/common.yml
+
+    # 4. Importeer de specifieke taken op basis van de variabele
+    - name: Importeer 'leerlingen' taken
+      ansible.builtin.import_playbook: playbooks/lln.yml
+      when: laptop_group == 'leerlingen'
+
+    - name: Importeer 'leerkrachten' taken
+      ansible.builtin.import_playbook: playbooks/lkn.yml
+      when: laptop_group == 'leerkrachten'
+
+    - name: Importeer 'administratie' taken
+      ansible.builtin.import_playbook: playbooks/admin.yml
+      when: laptop_group == 'administratie'

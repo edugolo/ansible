@@ -1,0 +1,3 @@
+# Modules voor ansible-pull
+collections:
+  - name: community.general

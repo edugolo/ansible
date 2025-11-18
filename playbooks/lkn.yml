@@ -1,0 +1,11 @@
+# Taken voor leerkrachten laptops
+- name: Specifieke taken voor Leerkrachten
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Installeer VSCodium (user)
+      community.general.flatpak:
+        name: com.vscodium.codium
+        state: present
+        method: user
+        remote: flathub
