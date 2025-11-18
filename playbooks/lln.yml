@@ -24,7 +24,7 @@
     # 1. Maak een mapje voor de achtergronden (in de user home)
     - name: Zorg dat de background map bestaat
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.local/share/backgrounds"
+        path: "{{ lookup('env', 'HOME') }}/.local/share/backgrounds"
         state: directory
         mode: '0755'
 
@@ -35,7 +35,7 @@
         url: "https://unsplash.com/photos/dKJXkKCF2D8/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzYzNDc1MjA3fA&force=true"
         # We slaan het op met een vaste naam.
         # Als je de URL hierboven verandert, overschrijft Ansible dit bestand.
-        dest: "{{ ansible_user_dir }}/.local/share/backgrounds/current_wallpaper.jpg"
+        dest: "{{ lookup('env', 'HOME') }}/.local/share/backgrounds/current_wallpaper.jpg"
         force: true # Forceer download (handig als Unsplash redirect)
         mode: '0644'
 
@@ -45,9 +45,9 @@
         key: "/org/gnome/desktop/background/picture-uri"
         # Let op de quotes! "'file://...'"
         # We gebruiken dark-mode uri ook voor de zekerheid
-        value: "'file://{{ ansible_user_dir }}/.local/share/backgrounds/current_wallpaper.jpg'"
+        value: "'file://{{ lookup('env', 'HOME') }}/.local/share/backgrounds/current_wallpaper.jpg'"
       
     - name: Activeer de wallpaper ook voor Dark Mode
       community.general.dconf:
         key: "/org/gnome/desktop/background/picture-uri-dark"
-        value: "'file://{{ ansible_user_dir }}/.local/share/backgrounds/current_wallpaper.jpg'"
+        value: "'file://{{ lookup('env', 'HOME') }}/.local/share/backgrounds/current_wallpaper.jpg'"
