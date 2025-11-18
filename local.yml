@@ -7,7 +7,8 @@
   pre_tasks:
     # 1. Lees het /etc/laptop-group bestand
     - name: Bepaal de laptopgroep
-      ansible.builtin.command: cat /etc/ansible/laptop-group
+      # ansible.builtin.command: cat /etc/ansible/laptop-group
+      ansible.builtin.shell: cat /usr/share/ansible/laptop-group 2>/dev/null
       register: group_file_content
       changed_when: false
       failed_when: false # Faal niet als het bestand niet bestaat
@@ -19,18 +20,18 @@
 
   tasks:
     # 3. Importeer ALTIJD de 'common' taken
-    - name: Importeer 'common' taken (voor iedereen)
-      ansible.builtin.import_playbook: playbooks/common.yml
+    - name: Voer common taken uit
+      ansible.builtin.include_tasks: playbooks/common.yml
 
     # 4. Importeer de specifieke taken op basis van de variabele
-    - name: Importeer 'leerlingen' taken
-      ansible.builtin.import_playbook: playbooks/lln.yml
+    - name: Voer leerlingen taken uit
+      ansible.builtin.include_tasks: playbooks/lln.yml
       when: laptop_group == 'leerlingen'
 
-    - name: Importeer 'leerkrachten' taken
-      ansible.builtin.import_playbook: playbooks/lkn.yml
+    - name: Voer leerkrachten taken uit
+      ansible.builtin.include_tasks: playbooks/lkn.yml
       when: laptop_group == 'leerkrachten'
 
-    - name: Importeer 'administratie' taken
-      ansible.builtin.import_playbook: playbooks/admin.yml
+    - name: Voer administratie taken uit
+      ansible.builtin.include_tasks: playbooks/admin.yml
       when: laptop_group == 'administratie'

@@ -1,19 +1,15 @@
 # Taken voor alle laptops
 # playbooks/common.yml
-- name: Algemene taken voor alle groepen
-  hosts: localhost
-  connection: local
-  tasks:
-    - name: Zorg dat Firefox (user) geïnstalleerd is
-      community.general.flatpak:
-        name: org.mozilla.firefox
-        state: present
-        method: user
-        remote: flathub
+- name: Zorg dat Firefox (user) geïnstalleerd is
+  community.general.flatpak:
+    name: org.mozilla.firefox
+    state: present
+    method: user
+    remote: flathub
 
-    - name: Zorg dat VLC (user) geïnstalleerd is
-      community.general.flatpak:
-        name: org.videolan.VLC
-        state: present
-        method: user
-        remote: flathub
+- name: Zorg dat VLC (user) geïnstalleerd is
+  community.general.flatpak:
+    name: org.videolan.VLC
+    state: present
+    method: user
+    remote: flathub
