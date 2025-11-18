@@ -10,5 +10,6 @@
 - name: Zorg dat Steam (user) VERWIJDERD is
   community.general.flatpak:
     name: com.valvesoftware.Steam
-    state: absent # Zorgt ervoor dat het niet geïnstalleerd is
+    state: present # absent # Zorgt ervoor dat het niet geïnstalleerd is
     method: user
+    remote: flathub
