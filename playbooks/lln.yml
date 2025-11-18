@@ -18,7 +18,10 @@
 #   community.general.dconf:
 #     key: "/org/gnome/desktop/background/picture-uri"
 #     value: "'file:///usr/share/backgrounds/coolbx/archi.png'"
-
+- name: Zet window menubar layout
+  community.general.dconf:
+    key: "org/gnome/desktop/wm/preferences/button-layout"
+    value: "'appmenu:maximize,close'"
 - name: Wallpaper setup
   block:
     # 1. Maak een mapje voor de achtergronden (in de user home)
