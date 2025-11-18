@@ -13,3 +13,8 @@
     state: present # absent # Zorgt ervoor dat het niet geïnstalleerd is
     method: user
     remote: flathub
+
+- name: Zet school achtergrond
+  community.general.dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///usr/share/backgrounds/coolbx/window.png"
