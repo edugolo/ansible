@@ -17,4 +17,4 @@
 - name: Zet school achtergrond
   community.general.dconf:
     key: "/org/gnome/desktop/background/picture-uri"
-    value: "'file:///usr/share/backgrounds/coolbx/window.png"
+    value: "file:///usr/share/backgrounds/coolbx/window.png"
