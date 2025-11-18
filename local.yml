@@ -12,6 +12,7 @@
       register: group_file_content
       changed_when: false
       failed_when: false # Faal niet als het bestand niet bestaat
+      check_mode: false
 
     # 2. Sla de inhoud op in een variabele (e.g., "leerlingen")
     - name: Zet de 'laptop_group' variabele
